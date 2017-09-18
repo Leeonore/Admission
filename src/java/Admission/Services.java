@@ -37,9 +37,9 @@ public class Services {
         em.getTransaction().commit();
     }
     
-    public Patient newPatient(String IPP, String nom, String prenom, Date dateNaiss, String adresse, String phone, String numSS){
+    public Patient newPatient(int IPP, String nom, String prenom, Date dateNaiss, String adresse, String phone, String numSS){
         //Créer un nouveau patient lors de sa première venue (IPP, nom, prénom, DateNaiss, adresse, téléphone, n°SS)
-        Patient pat= newPatient();
+        Patient pat= new Patient();
         pat.setIPP(IPP);
         pat.setNom(nom);
         pat.setPrenom(prenom);
@@ -51,10 +51,12 @@ public class Services {
         em.getTransaction( ).begin( );
         em.persist(pat);
         em.getTransaction().commit();
+        
+        return pat;
     }
     
-    public void removePatient(String IPP) {
-        Patient pat = em.find( Patient.class, IPP ); //ça va marcher ??? peut-être :p
+    public void removePatient(int IPP) {
+        Patient pat = em.find( Patient.class, IPP ); //ça va marcher ???
 	em.getTransaction( ).begin( );
         em.remove(pat);
         em.getTransaction().commit();
@@ -67,7 +69,7 @@ public class Services {
         em.getTransaction().commit();
     }
     
-    public Patient getPatientByIPP(String IPP) {       
+    public Patient getPatientByIPP(int IPP) {       
 	Patient res = em.find( Patient.class, IPP );      
         return res;
     }
@@ -85,33 +87,35 @@ public class Services {
     }
     
 /** Gestion des Venues **/    
-    public void newVenue(){
+    public void newVenue(Venue venue){
         //Créer une nouvelle venue pour un patient existant (IPP, IEP, DateHeure venue/sortie, UF traitement, type venue)
         em.getTransaction( ).begin( );
-        em.persist(pat);
+        em.persist(venue);
         em.getTransaction().commit();
     }
     
-    public Venue newVenue(String IPP, String IEP, Date dateVenue, Date dateSortie, String UFtraitement, String typeVenue){
+    public Venue newVenue(int IPP, int IEP, Date dateVenue, Date dateSortie, String UFtraitement, String typeVenue){
         //Créer une nouvelle venue pour un patient existant (IPP, IEP, DateHeure venue/sortie, UF traitement, type venue)
-        Venue venue= newVenue();
+        Venue venue= new Venue();
         venue.setIPP(IPP);
         venue.setIEP(IEP);
         venue.setDateVenue(dateVenue);
         venue.setDateSortie(dateSortie);
-        venue.setUF(UFtraitement);
-        venue.setType(typeVenue);
+        venue.setUFtraitement(UFtraitement);
+        venue.setTypeVenue(typeVenue);
         
         em.getTransaction( ).begin( );
         em.persist(venue);
         em.getTransaction().commit();
+        
+        return venue;
     }
         
     public void FindVenue(){
         // Rechercher une venue
     }
 
-    public Venue getVenueByIEP(String IeP) {       
+    public Venue getVenueByIEP(int IEP) {       
 	Venue res = em.find( Venue.class, IEP );      
         return res;
     }
@@ -119,7 +123,7 @@ public class Services {
     public void editVenue(Venue venue){
         //Modifier une venue (dont ajoue date fin)
         em.getTransaction( ).begin( );
-        em.merge(Venue);
+        em.merge(venue);
         em.getTransaction().commit();
     }
     
