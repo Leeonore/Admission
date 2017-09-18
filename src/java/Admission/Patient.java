@@ -5,10 +5,95 @@
  */
 package Admission;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author nrodrigu
  */
-public class Patient {
+@Entity
+@XmlRootElement
+public class Patient implements Serializable {
+    private static final long serialVersionUID = 1L;
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int IPP;
+    
+    private String nom;
+    private String prenom;
+    private String dateNaiss;
+    private String adresse;
+    private String phone;
+    private String sexe;
+    private String numSecu;
+
+    public int getIPP() {
+        return IPP;
+    }
+
+    public void setIPP(int IPP) {
+        this.IPP = IPP;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getDateNaiss() {
+        return dateNaiss;
+    }
+
+    public void setDateNaiss(String dateNaiss) {
+        this.dateNaiss = dateNaiss;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String téléphone) {
+        this.phone = téléphone;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+
+    public String getNumSecu() {
+        return numSecu;
+    }
+
+    public void setNumSecu(String numSecu) {
+        this.numSecu = numSecu;
+    }
 }

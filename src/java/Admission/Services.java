@@ -54,7 +54,7 @@ public class Services {
     }
     
     public void removePatient(String IPP) {
-        Patient pat = em.find( Patient.class, IPP ); //ça va marcher ???
+        Patient pat = em.find( Patient.class, IPP ); //ça va marcher ??? peut-être :p
 	em.getTransaction( ).begin( );
         em.remove(pat);
         em.getTransaction().commit();

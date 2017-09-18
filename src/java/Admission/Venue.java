@@ -11,6 +11,4 @@ package Admission;
  */
 public class Venue {
     
-    
-    
 }
