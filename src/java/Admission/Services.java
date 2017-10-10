@@ -37,7 +37,7 @@ public class Services {
         em.getTransaction().commit();
     }
     
-    public Patient newPatient(int IPP, String nom, String prenom, Date dateNaiss, String adresse, String phone, String numSS){
+    public Patient newPatient(int IPP, String nom, String prenom, String dateNaiss, String adresse, String phone, String numSS){
         //Créer un nouveau patient lors de sa première venue (IPP, nom, prénom, DateNaiss, adresse, téléphone, n°SS)
         Patient pat= new Patient();
         pat.setIPP(IPP);
@@ -46,7 +46,7 @@ public class Services {
         pat.setDateNaiss(dateNaiss);
         pat.setAdresse(adresse);
         pat.setPhone(phone);
-        pat.setSS(numSS);
+        pat.setNumSecu(numSS);
         
         em.getTransaction( ).begin( );
         em.persist(pat);
@@ -55,7 +55,7 @@ public class Services {
         return pat;
     }
     
-    public void removePatient(int IPP) {
+    public void removePatient(int IPP) { //utile ? En théorie on ne supprime jamais un patient.
         Patient pat = em.find( Patient.class, IPP ); //ça va marcher ???
 	em.getTransaction( ).begin( );
         em.remove(pat);
@@ -74,9 +74,9 @@ public class Services {
         return res;
     }
     
-    public void FindPatient(String nom, String prenom, Date dateNaiss ){
+    public void FindPatient(String nom, String prenom, String dateNaiss ){
         // Rechercher un patient par nom, prénom, date de naiss
-        TypedQuery<Patient> query = em.createQuery("SELECT p FROM Patient p WHERE p.Nom = :nom AND p.prenom=:prenom AND p.dateNaiss = :dateNaiss", Patient.class).setParameter("couleur",couleur); //MODIFIER
+        TypedQuery<Patient> query = em.createQuery("SELECT p FROM Patient p WHERE p.Nom = :nom AND p.prenom=:prenom AND p.dateNaiss = :dateNaiss", Patient.class); //MODIFIER
         List<Patient> res = query.getResultList();
     }
     
@@ -94,7 +94,7 @@ public class Services {
         em.getTransaction().commit();
     }
     
-    public Venue newVenue(int IPP, int IEP, Date dateVenue, Date dateSortie, String UFtraitement, String typeVenue){
+    public Venue newVenue(int IPP, int IEP, String dateVenue, String dateSortie, String UFtraitement, String typeVenue){
         //Créer une nouvelle venue pour un patient existant (IPP, IEP, DateHeure venue/sortie, UF traitement, type venue)
         Venue venue= new Venue();
         venue.setIPP(IPP);
@@ -111,8 +111,10 @@ public class Services {
         return venue;
     }
         
-    public void FindVenue(){
+    public void FindVenue(int IPP, int IEP, String dateVenue){
         // Rechercher une venue
+        TypedQuery<Venue> query = em.createQuery("SELECT v FROM Venue v WHERE v.IPP = :IPP AND v.IEP=:IEP AND v.dateVenue = :dateVenue", Venue.class);
+        List<Venue> res = query.getResultList();
     }
 
     public Venue getVenueByIEP(int IEP) {       

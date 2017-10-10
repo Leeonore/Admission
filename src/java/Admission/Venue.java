@@ -29,8 +29,8 @@ public class Venue implements Serializable {
     
     @Column
     private int IPP;
-    private Date dateVenue;
-    private Date dateSortie;
+    private String dateVenue;
+    private String dateSortie;
     private String UFtraitement;
     private String typeVenue;
 
@@ -42,11 +42,11 @@ public class Venue implements Serializable {
         return IPP;
     }
 
-    public Date getDateVenue() {
+    public String getDateVenue() {
         return dateVenue;
     }
 
-    public Date getDateSortie() {
+    public String getDateSortie() {
         return dateSortie;
     }
 
@@ -66,11 +66,11 @@ public class Venue implements Serializable {
         this.IPP = IPP;
     }
 
-    public void setDateVenue(Date dateVenue) {
+    public void setDateVenue(String dateVenue) {
         this.dateVenue = dateVenue;
     }
 
-    public void setDateSortie(Date dateSortie) {
+    public void setDateSortie(String dateSortie) {
         this.dateSortie = dateSortie;
     }
 
