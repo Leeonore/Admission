@@ -28,10 +28,10 @@ public class Services {
         em.getTransaction().commit();
     }
     
-    public Patient newPatient(int IPP, String nom, String prenom, String dateNaiss, String adresse, String phone, String numSS){
+    public Patient newPatient(String nom, String prenom, String dateNaiss, String adresse, String phone, String numSS){
         //Créer un nouveau patient lors de sa première venue (IPP, nom, prénom, DateNaiss, adresse, téléphone, n°SS)
         Patient pat= new Patient();
-        pat.setIPP(IPP);
+        //pat.setIPP(IPP); inutil car généré automatiquement
         pat.setNom(nom);
         pat.setPrenom(prenom);
         pat.setDateNaiss(dateNaiss);
@@ -71,10 +71,11 @@ public class Services {
         return res;
     }
     
-    public void FindPatient(String nom, String prenom, String dateNaiss ){
+    public List<Patient> FindPatient(String nom, String prenom, String dateNaiss ){
         // Rechercher un patient par nom, prénom, date de naiss
-        TypedQuery<Patient> query = em.createQuery("SELECT p FROM Patient p WHERE p.Nom = :nom AND p.prenom=:prenom AND p.dateNaiss = :dateNaiss", Patient.class); //MODIFIER
+        TypedQuery<Patient> query = em.createQuery("SELECT p FROM Patient p WHERE p.nom = :nom AND p.prenom=:prenom AND p.dateNaiss = :dateNaiss", Patient.class); //MODIFIER
         List<Patient> res = query.getResultList();
+        return (res);
     }
     
     public List<Patient> getAllPatient() {
@@ -94,8 +95,8 @@ public class Services {
     public Venue newVenue(int IPP, int IEP, String dateVenue, String dateSortie, String UFtraitement, String typeVenue){
         //Créer une nouvelle venue pour un patient existant (IPP, IEP, DateHeure venue/sortie, UF traitement, type venue)
         Venue venue= new Venue();
-        venue.setIPP(IPP);
-        venue.setIEP(IEP);
+        //venue.setIPP(IPP);
+        //venue.setIEP(IEP);
         venue.setDateVenue(dateVenue);
         venue.setDateSortie(dateSortie);
         venue.setUFtraitement(UFtraitement);

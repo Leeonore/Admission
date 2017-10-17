@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/Admission"/>
+<Context antiJARLocking="true" path="/Admission">
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="isis1" password="isis1" type="javax.sql.DataSource" url="jdbc:mysql://kim.kurasawa.fr:3306/isis1?zeroDateTimeBehavior=convertToNull" username="isis1"/>
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="isis1" password="isis1" type="javax.sql.DataSource" url="jdbc:mysql://kim.kurasawa.fr:3306/isis1?zeroDateTimeBehavior=convertToNull" username="isis1"/>
+</Context>
