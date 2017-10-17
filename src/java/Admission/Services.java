@@ -31,7 +31,7 @@ public class Services {
     public Patient newPatient(String nom, String prenom, String dateNaiss, String adresse, String phone, String numSS){
         //Créer un nouveau patient lors de sa première venue (IPP, nom, prénom, DateNaiss, adresse, téléphone, n°SS)
         Patient pat= new Patient();
-        //pat.setIPP(IPP); inutil car généré automatiquement
+        //pat.setIPP(IPP); inutile car généré automatiquement
         pat.setNom(nom);
         pat.setPrenom(prenom);
         pat.setDateNaiss(dateNaiss);
@@ -46,8 +46,8 @@ public class Services {
         return pat;
     }
     
-    public void removePatient(int IPP) { //utile ? En théorie on ne supprime jamais un patient.
-        Patient pat = em.find( Patient.class, IPP ); //ça va marcher ???
+    public void removePatient(int IPP) {
+        Patient pat = em.find( Patient.class, IPP );
 	em.getTransaction( ).begin( );
         em.remove(pat);
         em.getTransaction().commit();
@@ -73,7 +73,10 @@ public class Services {
     
     public List<Patient> FindPatient(String nom, String prenom, String dateNaiss ){
         // Rechercher un patient par nom, prénom, date de naiss
-        TypedQuery<Patient> query = em.createQuery("SELECT p FROM Patient p WHERE p.nom = :nom AND p.prenom=:prenom AND p.dateNaiss = :dateNaiss", Patient.class); //MODIFIER
+        TypedQuery<Patient> query = em.createQuery("SELECT p FROM Patient p WHERE p.nom = :nom AND p.prenom=:prenom AND p.dateNaiss = :dateNaiss", Patient.class)
+                .setParameter("nom", nom)
+                .setParameter("prenom", prenom)
+                .setParameter("dateNaiss", dateNaiss);
         List<Patient> res = query.getResultList();
         return (res);
     }
@@ -111,7 +114,10 @@ public class Services {
         
     public void FindVenue(int IPP, int IEP, String dateVenue){
         // Rechercher une venue
-        TypedQuery<Venue> query = em.createQuery("SELECT v FROM Venue v WHERE v.IPP = :IPP AND v.IEP=:IEP AND v.dateVenue = :dateVenue", Venue.class);
+        TypedQuery<Venue> query = em.createQuery("SELECT v FROM Venue v WHERE v.IPP = :IPP AND v.IEP=:IEP AND v.dateVenue = :dateVenue", Venue.class)
+                .setParameter("IPP", IPP)
+                .setParameter("IEP", IEP)
+                .setParameter("dateVenue", dateVenue);
         List<Venue> res = query.getResultList();
     }
 

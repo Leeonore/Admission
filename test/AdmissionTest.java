@@ -72,8 +72,8 @@ public class AdmissionTest {
 //    }
     @Test
     public void AddOnePatient() {
-        //clean();
-    //Test de la création d'un patient
+        clean();
+        //Test de la création d'un patient
         Services serv = new Services(DatabaseUtils.factTest());
         Patient pat = new Patient();
         pat.setNom("Nom1");
@@ -107,8 +107,8 @@ public class AdmissionTest {
     
         @Test
     public void RemoveAllPatient() {
-        //clean();
-    //Créer deux patients
+        clean();
+        //Créer deux patients
         Services serv = new Services(DatabaseUtils.factTest());
         for (int i=1; i<3; i++){
             Patient pat = new Patient();
@@ -123,17 +123,17 @@ public class AdmissionTest {
          }
         assert(!serv.getAllPatient().isEmpty());
         
-    // Supprimer les patients
+        // Supprimer les patients
         serv.removeAllPatient();
     
-    // Tester la suppression
+        // Tester la suppression
         assert (serv.getAllPatient().isEmpty());
     }
     
     @Test
     public void AddMultiPatient() {
-        //clean();
-    //Test de la création de plusieurs patients
+        clean();
+        //Test de la création de plusieurs patients
         Services serv = new Services(DatabaseUtils.factTest());
         List<Patient> liste = new ArrayList<>();
         for (int i=1; i<4; i++){
@@ -191,18 +191,18 @@ public class AdmissionTest {
         assert (serv.getPatientByIPP(liste.get(1).getIPP()) != null);
         assert (serv.getPatientByIPP(liste.get(2).getIPP()) != null);
         
-//        assert (!serv.FindPatient("Nom1", "prenom1", "DateNaiss1").isEmpty());
-//        assert (serv.FindPatient("Nom1", "prenom1", "DateNaiss1").size() == 1);
-//        assert (!serv.FindPatient("Nom2", "prenom2", "DateNaiss2").isEmpty());
-//        assert (serv.FindPatient("Nom2", "prenom2", "DateNaiss2").size() == 1);
-//        assert (!serv.FindPatient("Nom3", "prenom3", "DateNaiss3").isEmpty());
-//        assert (serv.FindPatient("Nom3", "prenom3", "DateNaiss3").size() == 1);
+        assert (!serv.FindPatient("Nom1", "prenom1", "DateNaiss1").isEmpty());
+        assert (serv.FindPatient("Nom1", "prenom1", "DateNaiss1").size() == 1);
+        assert (!serv.FindPatient("Nom2", "prenom2", "DateNaiss2").isEmpty());
+        assert (serv.FindPatient("Nom2", "prenom2", "DateNaiss2").size() == 1);
+        assert (!serv.FindPatient("Nom3", "prenom3", "DateNaiss3").isEmpty());
+        assert (serv.FindPatient("Nom3", "prenom3", "DateNaiss3").size() == 1);
     }
     
     @Test
     public void AddHomoPatient() {
-        //clean();
-    //Test de la création d'homonyme
+        clean();
+        //Test de la création d'homonyme
         Services serv = new Services(DatabaseUtils.factTest());
         for (int i=1; i<3; i++){
             Patient pat = new Patient();
@@ -242,8 +242,8 @@ public class AdmissionTest {
         assert (patient.getSexe().equals("sexe2") );
  
         //La fonction de recherche fonctionne-t-elle ?
-//        assert (!serv.FindPatient("Nom1", "prenom1", "DateNaiss1").isEmpty());
-//        assert (serv.FindPatient("Nom1", "prenom1", "DateNaiss1").size() == 2);
+        assert (!serv.FindPatient("Nom1", "prenom1", "DateNaiss1").isEmpty());
+        assert (serv.FindPatient("Nom1", "prenom1", "DateNaiss1").size() == 2);
     }
 }
 
