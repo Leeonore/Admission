@@ -18,15 +18,10 @@ import org.hibernate.Session;
  * @author lgrandgu
  */
 public class Services {
-    EntityManagerFactory fact;
     EntityManager em;
     
-    public Services(EntityManagerFactory fact) {
-        this.fact = fact;
-        this.em = fact.createEntityManager();
-    }
-    public void close() {
-        em.close();
+    public Services(EntityManager em) {
+        this.em = em;
     }
     
 /** Gestion des patients **/
@@ -59,6 +54,12 @@ public class Services {
         Patient pat = em.find( Patient.class, IPP ); //ça va marcher ???
 	em.getTransaction( ).begin( );
         em.remove(pat);
+        em.getTransaction().commit();
+    }
+    
+    public void removeAllPatient() {
+        em.getTransaction().begin();
+        em.createQuery("DELETE FROM Patient").executeUpdate();
         em.getTransaction().commit();
     }
     
@@ -120,6 +121,19 @@ public class Services {
     public Venue getVenueByIEP(int IEP) {       
 	Venue res = em.find( Venue.class, IEP );      
         return res;
+    }
+    
+        public void removeVenue(int IEP) { //utile ? En théorie on ne supprime jamais un patient.
+        Venue ve = em.find( Venue.class, IEP ); //ça va marcher ???
+	em.getTransaction( ).begin( );
+        em.remove(ve);
+        em.getTransaction().commit();
+    }
+    
+    public void removeAllVenue() {
+        em.getTransaction().begin();
+        em.createQuery("DELETE FROM Venue").executeUpdate();
+        em.getTransaction().commit();
     }
     
     public void editVenue(Venue venue){
