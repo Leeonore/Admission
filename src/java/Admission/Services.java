@@ -28,7 +28,7 @@ public class Services {
         em.getTransaction().commit();
     }
     
-    public Patient newPatient(String nom, String prenom, String dateNaiss, String adresse, String phone, String numSS){
+    public Patient newPatient(String nom, String prenom, String dateNaiss, String adresse, String phone, String numSS, String sexe){
         //Créer un nouveau patient lors de sa première venue (IPP, nom, prénom, DateNaiss, adresse, téléphone, n°SS)
         Patient pat= new Patient();
         //pat.setIPP(IPP); inutile car généré automatiquement
@@ -38,6 +38,7 @@ public class Services {
         pat.setAdresse(adresse);
         pat.setPhone(phone);
         pat.setNumSecu(numSS);
+        pat.setSexe(sexe);
         
         em.getTransaction( ).begin( );
         em.persist(pat);
