@@ -10,8 +10,8 @@ public abstract class Venue_ {
 
 	public static volatile SingularAttribute<Venue, String> dateVenue;
 	public static volatile SingularAttribute<Venue, Integer> IEP;
+	public static volatile SingularAttribute<Venue, Patient> patient;
 	public static volatile SingularAttribute<Venue, String> dateSortie;
-	public static volatile SingularAttribute<Venue, Integer> IPP;
 	public static volatile SingularAttribute<Venue, String> typeVenue;
 	public static volatile SingularAttribute<Venue, String> UFtraitement;
 

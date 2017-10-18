@@ -126,8 +126,8 @@ public class Services {
         return res;
     }
     
-    public void removeVenue(int IEP) { //utile ? En théorie on ne supprime jamais un patient.
-        Venue ve = em.find( Venue.class, IEP ); //ça va marcher ???
+    public void removeVenue(int IEP) {
+        Venue ve = em.find( Venue.class, IEP );
 	em.getTransaction( ).begin( );
         em.remove(ve);
         em.getTransaction().commit();

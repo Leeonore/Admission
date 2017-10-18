@@ -6,7 +6,6 @@
 package test;
 
 import Admission.DatabaseUtils;
-import Admission.Patient;
 import Admission.Services;
 import Admission.Venue;
 import java.util.List;
@@ -127,6 +126,19 @@ public class VenueTest {
         assert(serv.getAllVenue().size() == 1);
         serv.removeVenue(serv.getAllVenue().get(0).getIEP());
         assert(serv.getAllVenue().isEmpty());
+    }
+    
+    @Test
+    public void editDateSortieTest() {
+        clean();
+        Services serv = new Services(DatabaseUtils.factTest());
+        serv.newVenue(serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "phone1", "numSS1", "sexe1"), "dateVenue1", "", "UFtraitement1", "typeVenue1");
+        assert(serv.getAllVenue().get(0).getDateSortie().equals(""));
+        
+        Venue v = serv.getAllVenue().get(0);
+        v.setDateSortie("dateSortie1");
+        serv.editVenue(v);
+        assert(serv.getAllVenue().get(0).getDateSortie().equals("dateSortie1"));
     }
     
     /*@Test
