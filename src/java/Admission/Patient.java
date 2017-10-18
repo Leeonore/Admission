@@ -29,7 +29,7 @@ public class Patient implements Serializable {
     private String prenom;
     private String dateNaiss;
     private String adresse;
-    private String phone;
+    private String telephone;
     private String sexe;
     private String numSecu;
 
@@ -74,11 +74,11 @@ public class Patient implements Serializable {
     }
 
     public String getPhone() {
-        return phone;
+        return telephone;
     }
 
-    public void setPhone(String téléphone) {
-        this.phone = téléphone;
+    public void setPhone(String telephone) {
+        this.telephone = telephone;
     }
 
     public String getSexe() {
