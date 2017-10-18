@@ -102,7 +102,6 @@ public class AdmissionTest {
         //Les fonctions de recherche fonctionnent-elles ?
         assert (serv.getPatientByIPP(patient.getIPP()) != null); //Vérifié : bien valeur "null" si existe pas
         assert (!serv.FindPatient("Nom1", "prenom1", "DateNaiss1").isEmpty());
-        System.out.println("testFind" + serv.FindPatient("Nom1", "prenom1", "DateNaiss1"));
     }
     
         @Test
@@ -153,38 +152,18 @@ public class AdmissionTest {
         assert(serv.getAllPatient().size()==3);
         
         // Les patient contiennent les (bonnes) info ?
-        // Le patient 1 :
-        Patient patient = serv.getAllPatient().get(0);
-        assert (patient != null );        
-        assert (patient.getNom().equals("Nom1") );
-        assert (patient.getDateNaiss().equals("DateNaiss1") );
-        assert (patient.getPrenom().equals("prenom1") );
-        assert (patient.getPhone().equals("telephone1") );
-        assert (patient.getAdresse().equals("Adresse1") );
-        assert (patient.getNumSecu().equals("numsecu1") );
-        assert (patient.getSexe().equals("sexe1") );
-        
-        // Le patient 2 :
-        patient = serv.getAllPatient().get(1);
-        assert (patient != null );        
-        assert (patient.getNom().equals("Nom2") );
-        assert (patient.getDateNaiss().equals("DateNaiss2") );
-        assert (patient.getPrenom().equals("prenom2") );
-        assert (patient.getPhone().equals("telephone2") );
-        assert (patient.getAdresse().equals("Adresse2") );
-        assert (patient.getNumSecu().equals("numsecu2") );
-        assert (patient.getSexe().equals("sexe2") );
- 
-        // Le patient 2 :
-        patient = serv.getAllPatient().get(2);
-        assert (patient != null );        
-        assert (patient.getNom().equals("Nom3") );
-        assert (patient.getDateNaiss().equals("DateNaiss3") );
-        assert (patient.getPrenom().equals("prenom3") );
-        assert (patient.getPhone().equals("telephone3") );
-        assert (patient.getAdresse().equals("Adresse3") );
-        assert (patient.getNumSecu().equals("numsecu3") );
-        assert (patient.getSexe().equals("sexe3") );
+        for (int i=0; i<3; i++){
+            Patient patient = serv.getAllPatient().get(i);
+            assert (patient != null );        
+            int j=i+1;
+            assert (patient.getNom().equals("Nom" + j));
+            assert (patient.getDateNaiss().equals("DateNaiss" + j));
+            assert (patient.getPrenom().equals("prenom" + j));
+            assert (patient.getPhone().equals("telephone" + j));
+            assert (patient.getAdresse().equals("Adresse" + j));
+            assert (patient.getNumSecu().equals("numsecu" + j));
+            assert (patient.getSexe().equals("sexe" + j) );
+        }
         
         //Les fonctions de recherche fonctionnent-elles ?
         assert (serv.getPatientByIPP(liste.get(0).getIPP()) != null);

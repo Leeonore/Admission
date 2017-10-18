@@ -27,7 +27,7 @@ public class Venue implements Serializable {
     private int IEP;
     
     @Column
-    private int IPP;
+    private Patient patient;
     private String dateVenue;
     private String dateSortie;
     private String UFtraitement;
@@ -37,8 +37,8 @@ public class Venue implements Serializable {
         return IEP;
     }
 
-    public int getIPP() {
-        return IPP;
+    public Patient getPatient() {
+        return patient;
     }
 
     public String getDateVenue() {
@@ -61,8 +61,8 @@ public class Venue implements Serializable {
         this.IEP = IEP;
     }
 
-    public void setIPP(int IPP) {
-        this.IPP = IPP;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public void setDateVenue(String dateVenue) {
