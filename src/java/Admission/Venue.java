@@ -57,10 +57,6 @@ public class Venue implements Serializable {
         return typeVenue;
     }
 
-    public void setIEP(int IEP) {
-        this.IEP = IEP;
-    }
-
     public void setPatient(Patient patient) {
         this.patient = patient;
     }

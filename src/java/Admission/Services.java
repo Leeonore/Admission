@@ -72,7 +72,7 @@ public class Services {
         return res;
     }
     
-    public List<Patient> FindPatient(String nom, String prenom, String dateNaiss ){
+    public List<Patient> findPatient(String nom, String prenom, String dateNaiss ){
         // Rechercher un patient par nom, prénom, date de naiss
         TypedQuery<Patient> query = em.createQuery("SELECT p FROM Patient p WHERE p.nom = :nom AND p.prenom=:prenom AND p.dateNaiss = :dateNaiss", Patient.class)
                 .setParameter("nom", nom)
@@ -96,11 +96,10 @@ public class Services {
         em.getTransaction().commit();
     }
     
-    public Venue newVenue(int IPP, int IEP, String dateVenue, String dateSortie, String UFtraitement, String typeVenue){
+    public Venue newVenue(Patient patient, String dateVenue, String dateSortie, String UFtraitement, String typeVenue){
         //Créer une nouvelle venue pour un patient existant (IPP, IEP, DateHeure venue/sortie, UF traitement, type venue)
         Venue venue= new Venue();
-        //venue.setIPP(IPP);
-        //venue.setIEP(IEP);
+        venue.setPatient(patient);
         venue.setDateVenue(dateVenue);
         venue.setDateSortie(dateSortie);
         venue.setUFtraitement(UFtraitement);
@@ -113,7 +112,7 @@ public class Services {
         return venue;
     }
         
-    public void FindVenue(int IPP, int IEP, String dateVenue){
+    public void findVenue(int IPP, int IEP, String dateVenue){
         // Rechercher une venue
         TypedQuery<Venue> query = em.createQuery("SELECT v FROM Venue v WHERE v.IPP = :IPP AND v.IEP=:IEP AND v.dateVenue = :dateVenue", Venue.class)
                 .setParameter("IPP", IPP)
@@ -127,7 +126,7 @@ public class Services {
         return res;
     }
     
-        public void removeVenue(int IEP) { //utile ? En théorie on ne supprime jamais un patient.
+    public void removeVenue(int IEP) { //utile ? En théorie on ne supprime jamais un patient.
         Venue ve = em.find( Venue.class, IEP ); //ça va marcher ???
 	em.getTransaction( ).begin( );
         em.remove(ve);
