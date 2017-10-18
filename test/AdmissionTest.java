@@ -70,10 +70,9 @@ public class AdmissionTest {
 //        assert(!res.isEmpty());
 //        assert(res.size() == 3);
 //    }
-    @Test
-    public void AddOnePatient() {
+    @Test //Tester de la création d'un patient  + recherches
+    public void AddOnePatient() {         
         clean();
-        //Test de la création d'un patient
         Services serv = new Services(DatabaseUtils.factTest());
         Patient pat = new Patient();
         pat.setNom("Nom1");
@@ -104,7 +103,7 @@ public class AdmissionTest {
         assert (!serv.FindPatient("Nom1", "prenom1", "DateNaiss1").isEmpty());
     }
     
-        @Test
+    @Test // Tester la suppression de tous les patients
     public void RemoveAllPatient() {
         clean();
         //Créer deux patients
@@ -129,7 +128,7 @@ public class AdmissionTest {
         assert (serv.getAllPatient().isEmpty());
     }
     
-    @Test
+    @Test //Tester la création de plusieurs patients + recherches
     public void AddMultiPatient() {
         clean();
         //Test de la création de plusieurs patients
@@ -178,7 +177,7 @@ public class AdmissionTest {
         assert (serv.FindPatient("Nom3", "prenom3", "DateNaiss3").size() == 1);
     }
     
-    @Test
+    @Test //Tester la création de deux homonymes + recherches
     public void AddHomoPatient() {
         clean();
         //Test de la création d'homonyme
@@ -194,31 +193,24 @@ public class AdmissionTest {
             pat.setSexe("sexe" + i);
             serv.newPatient(pat);
          }
-
+        
         // Les patients ont bien été créés ?
         assert(!serv.getAllPatient().isEmpty());
         assert(serv.getAllPatient().size()==2);
         
         // Le patient contient les (bonnes) info ?
-        Patient patient = serv.getAllPatient().get(0);
-        assert (patient != null );        
-        assert (patient.getNom().equals("Nom1") );
-        assert (patient.getDateNaiss().equals("DateNaiss1") );
-        assert (patient.getPrenom().equals("prenom1") );
-        assert (patient.getPhone().equals("telephone1") );
-        assert (patient.getAdresse().equals("Adresse1") );
-        assert (patient.getNumSecu().equals("numsecu1") );
-        assert (patient.getSexe().equals("sexe1") );
-        
-        patient = serv.getAllPatient().get(1);
-        assert (patient != null );        
-        assert (patient.getNom().equals("Nom1") );
-        assert (patient.getDateNaiss().equals("DateNaiss1") );
-        assert (patient.getPrenom().equals("prenom1") );
-        assert (patient.getPhone().equals("telephone2") );
-        assert (patient.getAdresse().equals("Adresse2") );
-        assert (patient.getNumSecu().equals("numsecu2") );
-        assert (patient.getSexe().equals("sexe2") );
+        for (int i=0; i<2; i++){
+            Patient patient = serv.getAllPatient().get(i);
+            assert (patient != null ); 
+            int j=i+1;
+            assert (patient.getNom().equals("Nom1") );
+            assert (patient.getDateNaiss().equals("DateNaiss1") );
+            assert (patient.getPrenom().equals("prenom1") );
+            assert (patient.getPhone().equals("telephone" + j) );
+            assert (patient.getAdresse().equals("Adresse" + j) );
+            assert (patient.getNumSecu().equals("numsecu" + j) );
+            assert (patient.getSexe().equals("sexe" + j) );
+        }
  
         //La fonction de recherche fonctionne-t-elle ?
         assert (!serv.FindPatient("Nom1", "prenom1", "DateNaiss1").isEmpty());
