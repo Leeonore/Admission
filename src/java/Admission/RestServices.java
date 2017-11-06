@@ -31,21 +31,23 @@ public class RestServices {
     }
 /* -------------------- RestService sur les patients  */  
     //Liste de tous les patients
+    
     @GET
     @Path("patients")
     @Produces("application/json")
     public List<Patient> getAllPatients(){
         return serv.getAllPatient();
     }
-    
+    /*
     //Recherche de patient par nom, prenom, date de naissance
     @GET
-    @Path("patiens?nom=<nom>&prenom=<prenom>&datenaiss=<dateNaiss>")
+    @Path("patients")
     @Produces("application/json")
     public List<Patient> findPatient(@DefaultValue("") @QueryParam("nom") String nom,@DefaultValue("") @QueryParam("prenom") String prenom,@DefaultValue("") @QueryParam("datenaiss") String dateNaiss){
         return serv.findPatient(nom, prenom, dateNaiss);
-    }
+    }*/
 
+    
     //Recherche de patient par IPP
     @GET
     @Path("patiens/{ipp}")

@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/nrodrigu/Documents/NetBeansProjects/Admission/web/META-INF/context.xml</file>
+            <file>file:/C:/Users/nrodrigu/Documents/NetBeansProjects/Admission/src/java/Admission/Services.java</file>
+            <file>file:/C:/Users/nrodrigu/Documents/NetBeansProjects/Admission/src/java/Admission/Venue.java</file>
+            <file>file:/C:/Users/nrodrigu/Documents/NetBeansProjects/Admission/src/conf/MANIFEST.MF</file>
+            <file>file:/C:/Users/nrodrigu/Documents/NetBeansProjects/Admission/test/test/VenueTest.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -25,8 +25,8 @@ public class DatabaseUtils {
    }
     
    static public void close() {
-       em.close();
-       fact.close();
+       if (em != null)  em.close();
+       if (fact != null) fact.close();
    }
    
     static public EntityManager factTest() {
