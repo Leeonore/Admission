@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/nrodrigu/Documents/NetBeansProjects/Admission/web/META-INF/context.xml</file>
-            <file>file:/C:/Users/nrodrigu/Documents/NetBeansProjects/Admission/src/java/Admission/Services.java</file>
-            <file>file:/C:/Users/nrodrigu/Documents/NetBeansProjects/Admission/src/java/Admission/Venue.java</file>
-            <file>file:/C:/Users/nrodrigu/Documents/NetBeansProjects/Admission/src/conf/MANIFEST.MF</file>
-            <file>file:/C:/Users/nrodrigu/Documents/NetBeansProjects/Admission/test/test/VenueTest.java</file>
+            <file>file:/C:/Users/lgrandgu/Documents/5A/Urbanisation%20et%20ingéniérie%20des%20SI%20de%20santé/1.Singer/Projet/Admission/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/lgrandgu/Documents/5A/Urbanisation%20et%20ingéniérie%20des%20SI%20de%20santé/1.Singer/Projet/Admission/test/test/PatientTest.java</file>
+            <file>file:/C:/Users/lgrandgu/Documents/5A/Urbanisation%20et%20ingéniérie%20des%20SI%20de%20santé/1.Singer/Projet/Admission/src/java/Admission/ApplicationConfig.java</file>
+            <file>file:/C:/Users/lgrandgu/Documents/5A/Urbanisation%20et%20ingéniérie%20des%20SI%20de%20santé/1.Singer/Projet/Admission/src/java/Admission/MyAppServletContextListener.java</file>
+            <file>file:/C:/Users/lgrandgu/Documents/5A/Urbanisation%20et%20ingéniérie%20des%20SI%20de%20santé/1.Singer/Projet/Admission/src/java/Admission/DatabaseUtils.java</file>
+            <file>file:/C:/Users/lgrandgu/Documents/5A/Urbanisation%20et%20ingéniérie%20des%20SI%20de%20santé/1.Singer/Projet/Admission/src/java/Admission/RestServices.java</file>
+            <file>file:/C:/Users/lgrandgu/Documents/5A/Urbanisation%20et%20ingéniérie%20des%20SI%20de%20santé/1.Singer/Projet/Admission/src/conf/persistence.xml</file>
         </group>
     </open-files>
 </project-private>
