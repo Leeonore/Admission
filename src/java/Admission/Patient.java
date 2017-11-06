@@ -6,10 +6,12 @@
 package Admission;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -19,6 +21,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 public class Patient implements Serializable {
+
+    @OneToMany(mappedBy = "patient")
+    private List<Venue> venues;
     private static final long serialVersionUID = 1L;
     
     @Id

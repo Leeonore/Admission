@@ -112,13 +112,14 @@ public class Services {
         return venue;
     }
         
-    public void findVenue(int IPP, int IEP, String dateVenue){
+    public List<Venue> findVenue(int IPP, int IEP, String dateVenue){
         // Rechercher une venue
-        TypedQuery<Venue> query = em.createQuery("SELECT v FROM Venue v WHERE v.IPP = :IPP AND v.IEP=:IEP AND v.dateVenue = :dateVenue", Venue.class)
+        TypedQuery<Venue> query = em.createQuery("SELECT v FROM Venue v JOIN v.patient p WHERE p.IPP = :IPP AND v.IEP=:IEP AND v.dateVenue = :dateVenue", Venue.class)
                 .setParameter("IPP", IPP)
                 .setParameter("IEP", IEP)
                 .setParameter("dateVenue", dateVenue);
         List<Venue> res = query.getResultList();
+        return res;
     }
 
     public Venue getVenueByIEP(int IEP) {       

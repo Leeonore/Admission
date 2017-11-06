@@ -141,8 +141,44 @@ public class VenueTest {
         assert(serv.getAllVenue().get(0).getDateSortie().equals("dateSortie1"));
     }
     
-    /*@Test
+    @Test
     public void deleteAllVenueTest() {
-        
-    }*/
+        clean();
+        Services serv = new Services(DatabaseUtils.factTest());
+        serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "phone1", "numSS1", "sexe1");
+        for (int i=0; i<3; i++) {
+            Venue v = new Venue();
+            v.setPatient(serv.findPatient("nom1", "prenom1", "dateNaiss1").get(0));
+            v.setDateVenue("dateVenue"+i);
+            v.setDateSortie("dateSortie"+i);
+            v.setTypeVenue("typeVenue"+i);
+            v.setUFtraitement("UFtraitement"+i);
+            serv.newVenue(v);
+        }
+        serv.removeAllVenue();
+        assert(serv.getAllVenue().isEmpty());
+    }
+    
+    @Test
+    public void findVenueTest() {
+        clean();
+        Services serv = new Services(DatabaseUtils.factTest());
+        serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "phone1", "numSS1", "sexe1");
+        for (int i=0; i<3; i++) {
+            Venue v = new Venue();
+            v.setPatient(serv.findPatient("nom1", "prenom1", "dateNaiss1").get(0));
+            v.setDateVenue("dateVenue"+i);
+            v.setDateSortie("dateSortie"+i);
+            v.setTypeVenue("typeVenue"+i);
+            v.setUFtraitement("UFtraitement"+i);
+            serv.newVenue(v);
+        }
+        /*System.out.println("testtest" + serv.getAllPatient().get(0));
+        System.out.println("testtest2" + serv.getAllPatient().get(0).getIPP());
+        System.out.println("testtest3" + serv.getAllVenue());
+        System.out.println("testtest4" + serv.getAllVenue().get(0).getIEP());
+        System.out.println("testtest4" + serv.findVenue(serv.getAllPatient().get(0).getIPP(), serv.getAllVenue().get(0).getIEP(), serv.getAllVenue().get(0).getDateVenue()));*/
+        //assert(serv.findVenue(serv.getAllPatient().get(0).getIPP(), serv.getAllVenue().get(0).getIEP(), serv.getAllVenue().get(0).getDateVenue()).size() == 1);
+        assert(serv.findVenue(1, 1, "dateVenue0").size() == 1);
+    }
 }

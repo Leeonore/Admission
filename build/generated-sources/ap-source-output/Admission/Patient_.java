@@ -1,6 +1,7 @@
 package Admission;
 
 import javax.annotation.Generated;
+import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
@@ -11,6 +12,7 @@ public abstract class Patient_ {
 	public static volatile SingularAttribute<Patient, String> numSecu;
 	public static volatile SingularAttribute<Patient, Integer> IPP;
 	public static volatile SingularAttribute<Patient, String> adresse;
+	public static volatile ListAttribute<Patient, Venue> venues;
 	public static volatile SingularAttribute<Patient, String> dateNaiss;
 	public static volatile SingularAttribute<Patient, String> telephone;
 	public static volatile SingularAttribute<Patient, String> sexe;

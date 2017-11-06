@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -26,11 +27,15 @@ public class Venue implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int IEP;
     
-    @Column
+    @ManyToOne
     private Patient patient;
+    @Column
     private String dateVenue;
+    @Column
     private String dateSortie;
+    @Column
     private String UFtraitement;
+    @Column
     private String typeVenue;
 
     public int getIEP() {
