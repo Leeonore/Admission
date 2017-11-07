@@ -22,8 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Patient implements Serializable {
 
-    @OneToMany(mappedBy = "patient")
-    private List<Venue> venues;
+
     private static final long serialVersionUID = 1L;
     
     @Id

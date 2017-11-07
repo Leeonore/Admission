@@ -88,6 +88,23 @@ public class Services {
         return res;
     }
     
+    public Boolean findDoublon(Patient pat){
+        List<Patient> patients = getAllPatient();
+        Boolean doublon = false;
+        for (Patient patient : patients){
+            if (pat.getNom().equals(patient.getNom()) && pat.getPrenom().equals(patient.getPrenom()) && pat.getDateNaiss().equals(patient.getDateNaiss())){
+                doublon = true;
+            }
+        }
+        return(doublon);
+    }
+    public List<Venue> getVenuePatient(Patient pat){
+	TypedQuery<Venue> query = em.createQuery("SELECT v FROM Venue v WHERE v.patient.IPP = :IPP ", Venue.class)
+                .setParameter("IPP", pat.getIPP());
+        List<Venue> res = query.getResultList();
+        return res;
+    }
+    
 /** Gestion des Venues **/    
     public void newVenue(Venue venue){
         //Créer une nouvelle venue pour un patient existant (IPP, IEP, DateHeure venue/sortie, UF traitement, type venue)

@@ -244,4 +244,22 @@ public class PatientTest {
         System.out.println("test231" + serv.getAllPatient().get(0).getAdresse());
     }
     
+    @Test //Tester la recherche de doublon
+    public void findDoublonTest(){
+        clean();
+        Services serv = new Services(DatabaseUtils.factTest());
+        serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "telephone1", "numsecu1", "sexe1");
+        
+        Patient pat1 = new Patient();
+            pat1.setNom("bernard");
+            pat1.setAdresse("prenom2");
+            pat1.setDateNaiss("dateNaiss2");
+        Patient pat2 = new Patient();
+            pat1.setNom("nom1");
+            pat1.setAdresse("prenom1");
+            pat1.setDateNaiss("dateNaiss1");    
+        assert(!serv.findDoublon(pat1));
+        assert(serv.findDoublon(pat2));
+    }
+    
 }

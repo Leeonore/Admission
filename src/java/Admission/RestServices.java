@@ -89,6 +89,16 @@ public class RestServices {
         return Response.status(200).build();
     }
    
+    
+    //Listes des venues du patients
+    @GET
+    @Path("listvenues/{ipp}")
+    @Produces("application/json")
+    public List<Venue> findVenuePatient(@PathParam("ipp") int IPP){
+        Patient pat= serv.getPatientByIPP(IPP);
+        return serv.getVenuePatient(pat);
+    }
+    
 /* -------------------- RestService sur les venues  */  
    
     //Recherche de venue par IPP, IEP, date de venue

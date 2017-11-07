@@ -8,6 +8,8 @@ package test;
 import Admission.DatabaseUtils;
 import Admission.Services;
 import Admission.Venue;
+import Admission.Patient;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import org.junit.After;
@@ -49,10 +51,8 @@ public class VenueTest {
 
     public void clean() {
         Services serv = new Services(DatabaseUtils.factTest());
-        serv.removeAllPatient();
-        serv.removeAllVenue();
-        List<Venue> res = serv.getAllVenue();
-        assert (res.isEmpty());
+        serv.removeAllVenue(); 
+        serv.removeAllPatient();       
     }
     
     @Test
@@ -164,6 +164,7 @@ public class VenueTest {
         clean();
         Services serv = new Services(DatabaseUtils.factTest());
         serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "phone1", "numSS1", "sexe1");
+        List<Venue> ven = new ArrayList();
         for (int i=0; i<3; i++) {
             Venue v = new Venue();
             v.setPatient(serv.findPatient("nom1", "prenom1", "dateNaiss1").get(0));
@@ -172,13 +173,25 @@ public class VenueTest {
             v.setTypeVenue("typeVenue"+i);
             v.setUFtraitement("UFtraitement"+i);
             serv.newVenue(v);
+            ven.add(v);
         }
-        /*System.out.println("testtest" + serv.getAllPatient().get(0));
-        System.out.println("testtest2" + serv.getAllPatient().get(0).getIPP());
-        System.out.println("testtest3" + serv.getAllVenue());
-        System.out.println("testtest4" + serv.getAllVenue().get(0).getIEP());
-        System.out.println("testtest4" + serv.findVenue(serv.getAllPatient().get(0).getIPP(), serv.getAllVenue().get(0).getIEP(), serv.getAllVenue().get(0).getDateVenue()));*/
-        //assert(serv.findVenue(serv.getAllPatient().get(0).getIPP(), serv.getAllVenue().get(0).getIEP(), serv.getAllVenue().get(0).getDateVenue()).size() == 1);
-        assert(serv.findVenue(1, 1, "dateVenue0").size() == 1);
+        assert(serv.findVenue(ven.get(0).getPatient().getIPP(),ven.get(0).getIEP(), "dateVenue0").size() == 1);
+    }
+    
+    @Test
+    public void getVenuePatientTest(){
+        clean();
+        Services serv = new Services(DatabaseUtils.factTest());
+        Patient pat1 = serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "phone1", "numSS1", "sexe1");
+        Patient pat2 = serv.newPatient("nom2", "prenom2", "dateNaiss2", "adresse2", "phone2", "numSS2", "sexe2");
+        for (int i=0; i<3; i++) {
+            serv.newVenue(pat1, "dateVenue" + i, "dateSortie"+i, "UFtraitement"+i, "typeVenue"+i);
+        }
+        for (int i=3; i<6; i++) {
+            serv.newVenue(pat2, "dateVenue" + i, "dateSortie"+i, "UFtraitement"+i, "typeVenue"+i);
+        }
+        assert(serv.getVenuePatient(pat1).size()==3);
+        assert(serv.getVenuePatient(pat2).size()==3);
+        
     }
 }
