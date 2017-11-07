@@ -6,6 +6,7 @@
 package Admission;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,6 +41,11 @@ public class Venue implements Serializable {
 
     public int getIEP() {
         return IEP;
+    }
+    
+
+    public void setIEP(int IEP) {
+        this.IEP = IEP;
     }
 
     public Patient getPatient() {
