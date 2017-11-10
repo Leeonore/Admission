@@ -38,6 +38,26 @@ public class Venue implements Serializable {
     private String UFtraitement;
     @Column
     private String typeVenue;
+    @Column
+    private String sexe;
+    @Column
+    private int send;
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+
+    public int getSend() {
+        return send;
+    }
+
+    public void setSend(int send) {
+        this.send = send;
+    }
 
     public int getIEP() {
         return IEP;
