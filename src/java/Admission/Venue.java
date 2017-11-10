@@ -39,17 +39,7 @@ public class Venue implements Serializable {
     @Column
     private String typeVenue;
     @Column
-    private String sexe;
-    @Column
     private int send;
-
-    public String getSexe() {
-        return sexe;
-    }
-
-    public void setSexe(String sexe) {
-        this.sexe = sexe;
-    }
 
     public int getSend() {
         return send;

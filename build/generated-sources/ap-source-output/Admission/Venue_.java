@@ -13,7 +13,6 @@ public abstract class Venue_ {
 	public static volatile SingularAttribute<Venue, Patient> patient;
 	public static volatile SingularAttribute<Venue, String> dateSortie;
 	public static volatile SingularAttribute<Venue, String> typeVenue;
-	public static volatile SingularAttribute<Venue, String> sexe;
 	public static volatile SingularAttribute<Venue, String> UFtraitement;
 	public static volatile SingularAttribute<Venue, Integer> send;
 
