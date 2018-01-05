@@ -21,31 +21,32 @@ public class Services {
     }
     
 /** Gestion des patients **/
-    public void newPatient(Patient pat){
-        //Créer l'objet patient dans la base
-        em.getTransaction( ).begin( );
-        em.persist(pat);
-        em.getTransaction().commit();
-    }
-    
-    public Patient newPatient(String nom, String prenom, String dateNaiss, String adresse, String phone, String numSS, String sexe){
-        //Créer un nouveau patient lors de sa première venue (IPP, nom, prénom, DateNaiss, adresse, téléphone, n°SS)
-        Patient pat= new Patient();
-        //pat.setIPP(IPP); inutile car généré automatiquement
-        pat.setNom(nom);
-        pat.setPrenom(prenom);
-        pat.setDateNaiss(dateNaiss);
-        pat.setAdresse(adresse);
-        pat.setPhone(phone);
-        pat.setNumSecu(numSS);
-        pat.setSexe(sexe);
-        
-        em.getTransaction( ).begin( );
-        em.persist(pat);
-        em.getTransaction().commit();
-        
-        return pat;
-    }
+    // Fonctions "newPatient"  ne sont plus utilisé avec "mergé" avec editPatient  
+//   public void newPatient(Patient pat){
+//        //Créer l'objet patient dans la base
+//        em.getTransaction( ).begin( );
+//        em.persist(pat);
+//        em.getTransaction().commit();
+//    }
+//    
+//    public Patient newPatient(String nom, String prenom, String dateNaiss, String adresse, String phone, String numSS, String sexe){
+//        //Créer un nouveau patient lors de sa première venue (IPP, nom, prénom, DateNaiss, adresse, téléphone, n°SS)
+//        Patient pat= new Patient();
+//        //pat.setIPP(IPP); inutile car généré automatiquement
+//        pat.setNom(nom);
+//        pat.setPrenom(prenom);
+//        pat.setDateNaiss(dateNaiss);
+//        pat.setAdresse(adresse);
+//        pat.setPhone(phone);
+//        pat.setNumSecu(numSS);
+//        pat.setSexe(sexe);
+//        
+//        em.getTransaction( ).begin( );
+//        em.persist(pat);
+//        em.getTransaction().commit();
+//        
+//        return pat;
+//    }
     
     public void removePatient(int IPP) {
         Patient pat = em.find( Patient.class, IPP );
@@ -61,7 +62,7 @@ public class Services {
     }
     
     public void editPatient(Patient pat){
-        //Modifier une patient
+        //Créer ou modifier un patient (s'il existe ou non)
         em.getTransaction( ).begin( );
         em.merge(pat);
         em.getTransaction().commit();
@@ -74,11 +75,30 @@ public class Services {
     
     public List<Patient> findPatient(String nom, String prenom, String dateNaiss ){
         // Rechercher un patient par nom, prénom, date de naiss
-        TypedQuery<Patient> query = em.createQuery("SELECT p FROM Patient p WHERE p.nom = :nom AND p.prenom=:prenom AND p.dateNaiss = :dateNaiss", Patient.class)
-                .setParameter("nom", nom)
-                .setParameter("prenom", prenom)
-                .setParameter("dateNaiss", dateNaiss);
-        List<Patient> res = query.getResultList();
+        TypedQuery<Patient> query;
+        List<Patient> res = null;
+        if (!nom.equals("") && !prenom.equals("") && !dateNaiss.equals("")){;
+                query = em.createQuery("SELECT p FROM Patient p WHERE p.nom LIKE CONCAT('%',:nom,'%') AND p.prenom LIKE CONCAT('%',:prenom,'%') AND p.dateNaiss = :dateNaiss", Patient.class)
+                    .setParameter("nom", nom)
+                    .setParameter("prenom", prenom)
+                    .setParameter("dateNaiss", dateNaiss);
+                res = query.getResultList();
+        } else if (!nom.equals("") && !prenom.equals("") && dateNaiss.equals("")){
+                query = em.createQuery("SELECT p FROM Patient p WHERE p.nom LIKE CONCAT('%',:nom,'%') AND p.prenom LIKE CONCAT('%',:prenom,'%')", Patient.class)
+                    .setParameter("nom", nom)
+                    .setParameter("prenom", prenom);
+                res = query.getResultList();
+        } else if (!nom.equals("") && prenom.equals("") && !dateNaiss.equals("")){
+                query = em.createQuery("SELECT p FROM Patient p WHERE p.nom LIKE CONCAT('%',:nom,'%') AND p.dateNaiss = :dateNaiss", Patient.class)
+                    .setParameter("nom", nom)
+                    .setParameter("dateNaiss", dateNaiss);
+                res = query.getResultList();
+        } else if (nom.equals("") && !prenom.equals("") && !dateNaiss.equals("")){
+                query = em.createQuery("SELECT p FROM Patient p WHERE p.prenom LIKE CONCAT('%',:prenom,'%') AND p.dateNaiss = :dateNaiss", Patient.class)
+                    .setParameter("prenom", prenom)
+                    .setParameter("dateNaiss", dateNaiss);
+                res = query.getResultList();
+        }
         return (res);
     }
     
@@ -106,28 +126,28 @@ public class Services {
     }
     
 /** Gestion des Venues **/    
-    public void newVenue(Venue venue){
-        //Créer une nouvelle venue pour un patient existant (IPP, IEP, DateHeure venue/sortie, UF traitement, type venue)
-        em.getTransaction( ).begin( );
-        em.persist(venue);
-        em.getTransaction().commit();
-    }
-    
-    public Venue newVenue(Patient patient, String dateVenue, String dateSortie, String UFtraitement, String typeVenue){
-        //Créer une nouvelle venue pour un patient existant (IPP, IEP, DateHeure venue/sortie, UF traitement, type venue)
-        Venue venue= new Venue();
-        venue.setPatient(patient);
-        venue.setDateVenue(dateVenue);
-        venue.setDateSortie(dateSortie);
-        venue.setUFtraitement(UFtraitement);
-        venue.setTypeVenue(typeVenue);
-        
-        em.getTransaction( ).begin( );
-        em.persist(venue);
-        em.getTransaction().commit();
-        
-        return venue;
-    }
+//    public void newVenue(Venue venue){
+//        //Créer une nouvelle venue pour un patient existant (IPP, IEP, DateHeure venue/sortie, UF traitement, type venue)
+//        em.getTransaction( ).begin( );
+//        em.persist(venue);
+//        em.getTransaction().commit();
+//    }
+//    
+//    public Venue newVenue(Patient patient, String dateVenue, String dateSortie, String UFtraitement, String typeVenue){
+//        //Créer une nouvelle venue pour un patient existant (IPP, IEP, DateHeure venue/sortie, UF traitement, type venue)
+//        Venue venue= new Venue();
+//        venue.setPatient(patient);
+//        venue.setDateVenue(dateVenue);
+//        venue.setDateSortie(dateSortie);
+//        venue.setUFtraitement(UFtraitement);
+//        venue.setTypeVenue(typeVenue);
+//        
+//        em.getTransaction( ).begin( );
+//        em.persist(venue);
+//        em.getTransaction().commit();
+//        
+//        return venue;
+//    }
         
     public List<Venue> findVenue(int IPP, int IEP, String dateVenue){
         // Rechercher une venue

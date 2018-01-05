@@ -55,34 +55,72 @@ public class VenueTest {
         serv.removeAllPatient();       
     }
     
+    public void IPPPatient(){
+        Patient pat = new Patient();
+        pat.setNom("nom1");
+        pat.setAdresse("adresse1");
+        pat.setDateNaiss("dateNaiss1");
+        pat.setPrenom("prenom1");
+        pat.setNumSecu("numsecu1");
+        pat.setPhone("telephone1");
+        pat.setSexe("sexe1");
+    }
+    
     @Test
     public void addOneVenueTest() {
         clean();
         Services serv = new Services(DatabaseUtils.factTest());
-        serv.newVenue(serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "phone1", "numSS1", "sexe1"), "dateVenue1", "dateSortie1", "UFtraitement1", "typeVenue1");
-        assert(!serv.getAllVenue().isEmpty());
-        assert(serv.getAllVenue().size() == 1);
-        
-        Venue v = serv.getAllVenue().get(0);
-        assert(v.getDateSortie().equals("dateSortie1"));
-        assert(v.getDateVenue().equals("dateVenue1"));
-        assert(v.getPatient().getNom().equals("nom1"));
-        assert(v.getUFtraitement().equals("UFtraitement1"));
-        assert(v.getTypeVenue().equals("typeVenue1"));
-    }
-    
-    @Test
-    public void addOneVenueByInfoTest() {
-        clean();
-        Services serv = new Services(DatabaseUtils.factTest());
-        serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "phone1", "numSS1", "sexe1");
+       //Création du patient
+        Patient pat = new Patient();
+        pat.setNom("nom1");
+        pat.setAdresse("adresse1");
+        pat.setDateNaiss("dateNaiss1");
+        pat.setPrenom("prenom1");
+        pat.setNumSecu("numsecu1");
+        pat.setPhone("telephone1");
+        pat.setSexe("sexe1");
+        serv.editPatient(pat);
+       //Création d'une venue
         Venue v = new Venue();
         v.setPatient(serv.findPatient("nom1", "prenom1", "dateNaiss1").get(0));
         v.setDateVenue("dateVenue1");
         v.setDateSortie("dateSortie1");
         v.setTypeVenue("typeVenue1");
         v.setUFtraitement("UFtraitement1");
-        serv.newVenue(v);
+        serv.editVenue(v);
+        
+        assert(!serv.getAllVenue().isEmpty());
+        assert(serv.getAllVenue().size() == 1);
+        
+        Venue v2 = serv.getAllVenue().get(0);
+        assert(v2.getDateSortie().equals("dateSortie1"));
+        assert(v2.getDateVenue().equals("dateVenue1"));
+        assert(v2.getPatient().getNom().equals("nom1"));
+        assert(v2.getUFtraitement().equals("UFtraitement1"));
+        assert(v2.getTypeVenue().equals("typeVenue1"));
+    }
+    
+    @Test
+    public void addOneVenueByInfoTest() {
+        clean();
+        Services serv = new Services(DatabaseUtils.factTest());
+       //Création du patient
+        Patient pat = new Patient();
+        pat.setNom("nom1");
+        pat.setAdresse("adresse1");
+        pat.setDateNaiss("dateNaiss1");
+        pat.setPrenom("prenom1");
+        pat.setNumSecu("numsecu1");
+        pat.setPhone("telephone1");
+        pat.setSexe("sexe1");
+        serv.editPatient(pat);
+        Venue v = new Venue();
+        v.setPatient(serv.findPatient("nom1", "prenom1", "dateNaiss1").get(0));
+        v.setDateVenue("dateVenue1");
+        v.setDateSortie("dateSortie1");
+        v.setTypeVenue("typeVenue1");
+        v.setUFtraitement("UFtraitement1");
+        serv.editVenue(v);
         
         assert(!serv.getAllVenue().isEmpty());
         assert(serv.getAllVenue().size() == 1);
@@ -93,7 +131,16 @@ public class VenueTest {
     public void addMultipleVenueOnePatient() {
         clean();
         Services serv = new Services(DatabaseUtils.factTest());
-        serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "phone1", "numSS1", "sexe1");
+       //Création du patient
+        Patient pat = new Patient();
+        pat.setNom("nom1");
+        pat.setAdresse("adresse1");
+        pat.setDateNaiss("dateNaiss1");
+        pat.setPrenom("prenom1");
+        pat.setNumSecu("numsecu1");
+        pat.setPhone("telephone1");
+        pat.setSexe("sexe1");
+        serv.editPatient(pat);
         for (int i=0; i<3; i++) {
             Venue v = new Venue();
             v.setPatient(serv.findPatient("nom1", "prenom1", "dateNaiss1").get(0));
@@ -101,7 +148,7 @@ public class VenueTest {
             v.setDateSortie("dateSortie"+i);
             v.setTypeVenue("typeVenue"+i);
             v.setUFtraitement("UFtraitement"+i);
-            serv.newVenue(v);
+            serv.editVenue(v);
         }
         assert(serv.getAllVenue().size() == 3);
         // Test que chaque venue concerne le même patient
@@ -114,14 +161,23 @@ public class VenueTest {
     public void deleteOneVenueByIEPTest() {
         clean();
         Services serv = new Services(DatabaseUtils.factTest());
-        serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "phone1", "numSS1", "sexe1");
+       //Création du patient
+        Patient pat = new Patient();
+        pat.setNom("nom1");
+        pat.setAdresse("adresse1");
+        pat.setDateNaiss("dateNaiss1");
+        pat.setPrenom("prenom1");
+        pat.setNumSecu("numsecu1");
+        pat.setPhone("telephone1");
+        pat.setSexe("sexe1");
+        serv.editPatient(pat);
         Venue v = new Venue();
         v.setPatient(serv.findPatient("nom1", "prenom1", "dateNaiss1").get(0));
         v.setDateVenue("dateVenue1");
         v.setDateSortie("dateSortie1");
         v.setTypeVenue("typeVenue1");
         v.setUFtraitement("UFtraitement1");
-        serv.newVenue(v);
+        serv.editVenue(v);
         
         assert(serv.getAllVenue().size() == 1);
         serv.removeVenue(serv.getAllVenue().get(0).getIEP());
@@ -132,12 +188,28 @@ public class VenueTest {
     public void editDateSortieTest() {
         clean();
         Services serv = new Services(DatabaseUtils.factTest());
-        serv.newVenue(serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "phone1", "numSS1", "sexe1"), "dateVenue1", "", "UFtraitement1", "typeVenue1");
+       //Création du patient
+        Patient pat = new Patient();
+        pat.setNom("nom1");
+        pat.setAdresse("adresse1");
+        pat.setDateNaiss("dateNaiss1");
+        pat.setPrenom("prenom1");
+        pat.setNumSecu("numsecu1");
+        pat.setPhone("telephone1");
+        pat.setSexe("sexe1");
+        serv.editPatient(pat);
+        Venue v = new Venue();
+        v.setPatient(serv.findPatient("nom1", "prenom1", "dateNaiss1").get(0));
+        v.setDateVenue("dateVenue1");
+        v.setDateSortie("dateSortie1");
+        v.setTypeVenue("typeVenue1");
+        v.setUFtraitement("UFtraitement1");
+        serv.editVenue(v);
         assert(serv.getAllVenue().get(0).getDateSortie().equals(""));
         
-        Venue v = serv.getAllVenue().get(0);
-        v.setDateSortie("dateSortie1");
-        serv.editVenue(v);
+        Venue v2 = serv.getAllVenue().get(0);
+        v2.setDateSortie("dateSortie1");
+        serv.editVenue(v2);
         assert(serv.getAllVenue().get(0).getDateSortie().equals("dateSortie1"));
     }
     
@@ -145,7 +217,16 @@ public class VenueTest {
     public void deleteAllVenueTest() {
         clean();
         Services serv = new Services(DatabaseUtils.factTest());
-        serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "phone1", "numSS1", "sexe1");
+       //Création du patient
+        Patient pat = new Patient();
+        pat.setNom("nom1");
+        pat.setAdresse("adresse1");
+        pat.setDateNaiss("dateNaiss1");
+        pat.setPrenom("prenom1");
+        pat.setNumSecu("numsecu1");
+        pat.setPhone("telephone1");
+        pat.setSexe("sexe1");
+        serv.editPatient(pat);
         for (int i=0; i<3; i++) {
             Venue v = new Venue();
             v.setPatient(serv.findPatient("nom1", "prenom1", "dateNaiss1").get(0));
@@ -153,7 +234,7 @@ public class VenueTest {
             v.setDateSortie("dateSortie"+i);
             v.setTypeVenue("typeVenue"+i);
             v.setUFtraitement("UFtraitement"+i);
-            serv.newVenue(v);
+            serv.editVenue(v);
         }
         serv.removeAllVenue();
         assert(serv.getAllVenue().isEmpty());
@@ -163,7 +244,16 @@ public class VenueTest {
     public void findVenueTest() {
         clean();
         Services serv = new Services(DatabaseUtils.factTest());
-        serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "phone1", "numSS1", "sexe1");
+       //Création du patient
+        Patient pat = new Patient();
+        pat.setNom("nom1");
+        pat.setAdresse("adresse1");
+        pat.setDateNaiss("dateNaiss1");
+        pat.setPrenom("prenom1");
+        pat.setNumSecu("numsecu1");
+        pat.setPhone("telephone1");
+        pat.setSexe("sexe1");
+        serv.editPatient(pat);
         List<Venue> ven = new ArrayList();
         for (int i=0; i<3; i++) {
             Venue v = new Venue();
@@ -172,7 +262,7 @@ public class VenueTest {
             v.setDateSortie("dateSortie"+i);
             v.setTypeVenue("typeVenue"+i);
             v.setUFtraitement("UFtraitement"+i);
-            serv.newVenue(v);
+            serv.editVenue(v);
             ven.add(v);
         }
         assert(serv.findVenue(ven.get(0).getPatient().getIPP(),ven.get(0).getIEP(), "dateVenue0").size() == 1);
@@ -182,13 +272,41 @@ public class VenueTest {
     public void getVenuePatientTest(){
         clean();
         Services serv = new Services(DatabaseUtils.factTest());
-        Patient pat1 = serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "phone1", "numSS1", "sexe1");
-        Patient pat2 = serv.newPatient("nom2", "prenom2", "dateNaiss2", "adresse2", "phone2", "numSS2", "sexe2");
+       //Création des patients
+        Patient pat1 = new Patient();
+        pat1.setNom("nom1");
+        pat1.setAdresse("adresse1");
+        pat1.setDateNaiss("dateNaiss1");
+        pat1.setPrenom("prenom1");
+        pat1.setNumSecu("numsecu1");
+        pat1.setPhone("telephone1");
+        pat1.setSexe("sexe1");
+        serv.editPatient(pat1);
+        Patient pat2 = new Patient();
+        pat2.setNom("nom2");
+        pat2.setAdresse("adresse2");
+        pat2.setDateNaiss("dateNaiss2");
+        pat2.setPrenom("prenom2");
+        pat2.setNumSecu("numsecu2");
+        pat2.setPhone("telephone2");
+        pat2.setSexe("sexe2");
+        serv.editPatient(pat2);
+        Venue v = new Venue();
         for (int i=0; i<3; i++) {
-            serv.newVenue(pat1, "dateVenue" + i, "dateSortie"+i, "UFtraitement"+i, "typeVenue"+i);
+            v.setPatient(serv.findPatient("nom1", "prenom1", "dateNaiss1").get(0));
+            v.setDateVenue("dateVenue"+i);
+            v.setDateSortie("dateSortie"+i);
+            v.setTypeVenue("typeVenue"+i);
+            v.setUFtraitement("UFtraitement"+i);
+            serv.editVenue(v);
         }
         for (int i=3; i<6; i++) {
-            serv.newVenue(pat2, "dateVenue" + i, "dateSortie"+i, "UFtraitement"+i, "typeVenue"+i);
+            v.setPatient(serv.findPatient("nom2", "prenom2", "dateNaiss2").get(0));
+            v.setDateVenue("dateVenue"+i);
+            v.setDateSortie("dateSortie"+i);
+            v.setTypeVenue("typeVenue"+i);
+            v.setUFtraitement("UFtraitement"+i);
+            serv.editVenue(v);
         }
         assert(serv.getVenuePatient(pat1).size()==3);
         assert(serv.getVenuePatient(pat2).size()==3);

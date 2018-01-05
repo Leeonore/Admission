@@ -54,24 +54,25 @@ public class RestServices {
         return serv.getPatientByIPP(IPP);
     }
     
-    //Creation d'un patient
+    //Creation ou modifier un patient (s'il existe ou non)
     @POST
     @Path("patients")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces("application/json")
     public Patient newPatient(Patient pat){
-        serv.newPatient(pat);
+        serv.editPatient(pat);
         return pat;
     }
     
-    //Modification d'un patient
-    @PUT
-    @Path("patients/{ipp}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response editPatient(Patient pat){
-        serv.editPatient(pat);
-        return Response.status(200).entity(pat).build();
-    }
+    //Modification d'un patient --> N'est plus utilisé car "mergé" avec Création
+//    @PUT
+//    @Path("patients/{ipp}")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces("application/json")
+//    public Response editPatient(Patient pat){
+//        serv.editPatient(pat);
+//        return Response.status(200).entity(pat).build();
+//    }
     
     //Suppression de tous les patients
     @DELETE
@@ -123,24 +124,24 @@ public class RestServices {
         return serv.getVenueByIEP(IEP);
     }
     
-    //Creation d'une venue
+    //Creation ou modification d'une venue
     @POST
     @Path("venues")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces("application/json")
     public Venue newVenue(Venue ven){
-        serv.newVenue(ven);
+        serv.editVenue(ven);
         return ven;
     }
     
-    //Modification d'une venue
-    @POST
-    @Path("venues/{ipp}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response editVenue(Venue ven){
-        serv.editVenue(ven);
-        return Response.status(200).entity(ven).build();
-    }
+//    //Modification d'une venue --> n'est plus utilisé car "mergé" avec création
+//    @POST
+//    @Path("venues/{ipp}")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response editVenue(Venue ven){
+//        serv.editVenue(ven);
+//        return Response.status(200).entity(ven).build();
+//    }
     
     //Suppression de toutes les venues
     @DELETE

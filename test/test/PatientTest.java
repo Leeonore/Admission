@@ -68,7 +68,7 @@ public class PatientTest {
         pat.setNumSecu("numsecu1");
         pat.setPhone("telephone1");
         pat.setSexe("sexe1");
-        serv.newPatient(pat);
+        serv.editPatient(pat);
         // Un patient a bien été créé ?
         assert (!serv.getAllPatient().isEmpty());
         assert (serv.getAllPatient().size() == 1);
@@ -89,35 +89,21 @@ public class PatientTest {
         assert (!serv.findPatient("nom1", "prenom1", "dateNaiss1").isEmpty());
     }
 
-    @Test //Tester la création de patient direct
-    public void addOnePatientInfo() {
-        clean();
-        Services serv = new Services(DatabaseUtils.factTest());
-        serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "telephone1", "numsecu1", "sexe1");
-
-        // Un patient a bien été créé ?
-        assert (!serv.getAllPatient().isEmpty());
-        assert (serv.getAllPatient().size() == 1);
-
-        // Le patient contient les (bonnes) info ?
-        Patient patient = serv.getAllPatient().get(0);
-        assert (patient != null);
-        assert (patient.getNom().equals("nom1"));
-        assert (patient.getDateNaiss().equals("dateNaiss1"));
-        assert (patient.getPrenom().equals("prenom1"));
-        assert (patient.getPhone().equals("telephone1"));
-        assert (patient.getAdresse().equals("adresse1"));
-        assert (patient.getNumSecu().equals("numsecu1"));
-        assert (patient.getSexe().equals("sexe1"));
-    }
-
     @Test // Tester la suppression de tous les patients
     public void removeAllPatient() {
         clean();
         //Créer deux patients
         Services serv = new Services(DatabaseUtils.factTest());
         for (int i = 1; i < 3; i++) {
-            serv.newPatient("nom" + i, "prenom" + i, "dateNaiss" + i, "adresse" + i, "telephone" + i, "numsecu" + i, "sexe" + i);
+            Patient pat = new Patient();
+            pat.setNom("nom" + i);
+            pat.setAdresse("adresse" + i);
+            pat.setDateNaiss("dateNaiss" + i);
+            pat.setPrenom("prenom" + i);
+            pat.setNumSecu("numsecu" + i);
+            pat.setPhone("telephone" + i);
+            pat.setSexe("sexe" + i);
+            serv.editPatient(pat);
         }
         assert (!serv.getAllPatient().isEmpty());
 
@@ -134,7 +120,15 @@ public class PatientTest {
         //Créer deux patients
         Services serv = new Services(DatabaseUtils.factTest());
         for (int i = 1; i < 3; i++) {
-            serv.newPatient("nom" + i, "prenom" + i, "dateNaiss" + i, "adresse" + i, "telephone" + i, "numsecu" + i, "sexe" + i);
+            Patient pat = new Patient();
+            pat.setNom("nom" + i);
+            pat.setAdresse("adresse" + i);
+            pat.setDateNaiss("dateNaiss" + i);
+            pat.setPrenom("prenom" + i);
+            pat.setNumSecu("numsecu" + i);
+            pat.setPhone("telephone" + i);
+            pat.setSexe("sexe" + i);
+            serv.editPatient(pat);
         }
         assert (!serv.getAllPatient().isEmpty()); //Ils sont bien créés ?
 
@@ -164,7 +158,7 @@ public class PatientTest {
             pat.setNumSecu("numsecu" + i);
             pat.setPhone("telephone" + i);
             pat.setSexe("sexe" + i);
-            serv.newPatient(pat);
+            serv.editPatient(pat);
             liste.add(pat);
         }
         // Les patients ont bien été créés ?
@@ -204,7 +198,15 @@ public class PatientTest {
         //Test de la création d'homonyme
         Services serv = new Services(DatabaseUtils.factTest());
         for (int i = 1; i < 3; i++) {
-            serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse" + i, "telephone" + i, "numsecu" + i, "sexe" + i);
+            Patient pat = new Patient();
+            pat.setNom("nom1");
+            pat.setAdresse("adresse1");
+            pat.setDateNaiss("dateNaiss1");
+            pat.setPrenom("prenom" + i);
+            pat.setNumSecu("numsecu" + i);
+            pat.setPhone("telephone" + i);
+            pat.setSexe("sexe" + i);
+            serv.editPatient(pat);
         }
 
         // Les patients ont bien été créés ?
@@ -234,7 +236,15 @@ public class PatientTest {
     public void editPatient() {
         clean();
         Services serv = new Services(DatabaseUtils.factTest());
-        serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "telephone1", "numsecu1", "sexe1");
+        Patient pat = new Patient();
+        pat.setNom("nom1");
+        pat.setAdresse("adresse1");
+        pat.setDateNaiss("dateNaiss1");
+        pat.setPrenom("prenom1");
+        pat.setNumSecu("numsecu1");
+        pat.setPhone("telephone1");
+        pat.setSexe("sexe1");
+        serv.editPatient(pat);
         Patient patient = serv.getAllPatient().get(0);
         patient.setAdresse("adresse2");
         serv.editPatient(patient);
@@ -248,7 +258,15 @@ public class PatientTest {
     public void findDoublonTest(){
         clean();
         Services serv = new Services(DatabaseUtils.factTest());
-        serv.newPatient("nom1", "prenom1", "dateNaiss1", "adresse1", "telephone1", "numsecu1", "sexe1");
+        Patient pat = new Patient();
+        pat.setNom("nom1");
+        pat.setAdresse("adresse1");
+        pat.setDateNaiss("dateNaiss1");
+        pat.setPrenom("prenom1");
+        pat.setNumSecu("numsecu1");
+        pat.setPhone("telephone1");
+        pat.setSexe("sexe1");
+        serv.editPatient(pat);
         
         Patient pat1 = new Patient();
             pat1.setNom("bernard");
